@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from os import getenv
+import random
 
 TOKEN = getenv('DISCORD_BOT_TOKEN')
 intents = discord.Intents.all()
@@ -15,7 +16,7 @@ async def on_message(message):
 @bot.command(name='dice')
 async def dice(ctx):
     dice = random.randint(1,6)
-    await message.channel.send(f"{dice}")
+    await ctx.send(random.randint(1, 6))
     
 
 bot.run(TOKEN)
