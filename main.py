@@ -14,4 +14,9 @@ async def on_message(message):
     else:
         await message.channel.send("Just Monika.")
 
+@bot.command(name='dice')
+async def dice(ctx):
+    await message.channel.send("Just Monika.")
+    
+
 bot.run(TOKEN)
