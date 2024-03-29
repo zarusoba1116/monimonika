@@ -11,6 +11,7 @@ bot = commands.Bot(command_prefix='$',help_command=None,case_insensitive=True,in
 async def on_message(message):
     if message.author.bot:
         return
-    await message.channel.send("Just Monika.")
+    else:
+        await message.channel.send("Just Monika.")
 
 bot.run(TOKEN)
