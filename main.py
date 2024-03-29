@@ -15,7 +15,6 @@ async def on_message(message):
 
 @bot.command(name='dice')
 async def dice(ctx):
-    dice = random.randint(1,6)
     await ctx.send(random.randint(1, 6))
     
 
