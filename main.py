@@ -9,6 +9,6 @@ bot = commands.Bot(command_prefix='$',help_command=None,case_insensitive=True,in
 
 @bot.listen("on_message")
 async def on_message(message):
-    message.channel.send("Just Monika.")
+    await message.channel.send("Just Monika.")
 
 bot.run(TOKEN)
