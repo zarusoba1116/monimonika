@@ -18,4 +18,10 @@ async def dice(ctx):
     dice = random.randint(1, 6)
     await ctx.send(f"今回の出目は**{dice}**です")
 
+@bot.command(name='guild')
+async def guild(ctx):
+    guild = ctx.guild.name
+    await ctx.send(f"サーバー名は**{guild}**です")
+
+
 bot.run(TOKEN)
