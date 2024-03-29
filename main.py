@@ -33,10 +33,10 @@ async def get_server_icon(ctx):
         # アイコンURLを取得
         icon_url = icon.url
         # アイコンを送信者にDMで送信
-        await ctx.author.send(f"サーバーのアイコン: {icon_url}")
+        await ctx.channel.send(f"サーバーのアイコン: {icon_url}")
     else:
         # アイコンが存在しない場合はエラーメッセージを送信
-        await ctx.send("サーバーのアイコンが見つかりませんでした。")
+        await ctx.channel.send("サーバーのアイコンが見つかりませんでした。")
 
 
 bot.run(TOKEN)
