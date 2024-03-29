@@ -25,11 +25,13 @@ async def guild(ctx):
 
 @bot.command(name='servericon')
 async def get_server_icon(ctx):
-    # コマンドが実行されたサーバーのアイコンURLを取得
-    icon_url = ctx.guild.icon.url
+    # コマンドが実行されたサーバーのアイコンを取得
+    icon = ctx.guild.icon
     
-    # サーバーのアイコンURLが存在する場合
-    if icon_url:
+    # サーバーのアイコンが存在する場合
+    if icon:
+        # アイコンURLを取得
+        icon_url = icon.url
         # アイコンを送信者にDMで送信
         await ctx.author.send(f"サーバーのアイコン: {icon_url}")
     else:
