@@ -11,12 +11,11 @@ bot = commands.Bot(command_prefix='$',help_command=None,case_insensitive=True,in
 async def on_message(message):
     if message.author.bot:
         return
-    else:
-        await message.channel.send("Just Monika.")
 
 @bot.command(name='dice')
 async def dice(ctx):
-    await message.channel.send(random.randint(1,6))
+    dice = random.randint(1,6)
+    await message.channel.send(f"{dice}")
     
 
 bot.run(TOKEN)
