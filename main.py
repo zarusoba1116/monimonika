@@ -26,7 +26,7 @@ async def guild(ctx):
 @bot.command(name='servericon')
 async def get_server_icon(ctx):
     # コマンドが実行されたサーバーのアイコンURLを取得
-    icon_url = ctx.guild.icon_url
+    icon_url = ctx.guild.icon.url
     
     # サーバーのアイコンURLが存在する場合
     if icon_url:
