@@ -16,7 +16,7 @@ async def on_message(message):
 
 @bot.command(name='dice')
 async def dice(ctx):
-    await message.channel.send(random.randint(1,5))
+    await message.channel.send(random.randint(1,6))
     
 
 bot.run(TOKEN)
