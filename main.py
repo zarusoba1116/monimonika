@@ -4,21 +4,26 @@ from os import getenv
 import random
 
 TOKEN = getenv('DISCORD_BOT_TOKEN')
+
 intents = discord.Intents.all()
 intents.typing = False
-bot = commands.Bot(command_prefix='$',help_command=None,case_insensitive=True,intents=intents)
+bot = commands.Bot(command_prefix='$', intents=intents)
 
-# Discord.pyのBotクラスを継承したクラスを作成
-class ChinchirorinBot(discord.Client):
-    def __init__(self):
-        super().__init__()
+# ゲームの設定
+INITIAL_FUND = 1000
+
+class ChinchirorinCog(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
         self.players = {}  # 参加者とその資金の辞書
 
+    @commands.Cog.listener()
     async def on_ready(self):
-        print(f'{self.user} がログインしました')
+        print(f'{self.bot.user} がログインしました')
 
+    @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author == self.user:
+        if message.author == self.bot.user:
             return
 
         if message.content.startswith('!start'):
@@ -30,7 +35,7 @@ class ChinchirorinBot(discord.Client):
 
     async def start_game(self, message):
         if len(self.players) == 0:
-            self.players[message.author.id] = 1000  # 最初の親の資金を設定
+            self.players[message.author.id] = INITIAL_FUND  # 最初の親の資金を設定
             await message.channel.send(f'{message.author.mention} がゲームを開始しました。')
             await message.channel.send('参加者は`!join`コマンドで参加してください。')
         else:
@@ -38,7 +43,7 @@ class ChinchirorinBot(discord.Client):
 
     async def join_game(self, message):
         if message.author.id not in self.players:
-            self.players[message.author.id] = 1000  # 参加者の初期資金を設定
+            self.players[message.author.id] = INITIAL_FUND  # 参加者の初期資金を設定
             await message.channel.send(f'{message.author.mention} がゲームに参加しました。')
         else:
             await message.channel.send(f'{message.author.mention} は既にゲームに参加しています。')
@@ -89,5 +94,5 @@ class ChinchirorinBot(discord.Client):
             await message.channel.send('ゲーム終了です。')
         self.players = {new_parent_id: parent_fund}  # 新しい親のみ残す
 
-
+bot.add_cog(ChinchirorinCog(bot))
 bot.run(TOKEN)
